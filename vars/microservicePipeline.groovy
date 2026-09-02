@@ -3,7 +3,9 @@ def call(Map config) {
         agent any
         stages {
             stage('Checkout') {
-                steps { checkout scm }
+                steps { 
+                    git branch: 'main' ,url: 'https://github.com/Yaathvik2020/jenkins-shared-library.git'
+                }
             }
             stage('Build & Test') {
                 steps {
@@ -22,7 +24,7 @@ def call(Map config) {
             }
             stage('Docker Build & Push') {
                 steps {
-                    dockerBuildPush(imageName: config.appName, tag: env.BUILD_NUMBER, registry: config.registry)
+                    dockerBuildPush(imageName: config.appName, tag: env.BUILD_NUMBER, dockerhubUser: config.dockerhubUser)
                 }
             }
             stage('Deploy') {
