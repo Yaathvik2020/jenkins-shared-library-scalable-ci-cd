@@ -1,12 +1,19 @@
 pipeline{
-agent any
-stages{
+     agent any
+ stages{
      stage('Payement service'){
-         // payment-service (Node.js)
-        // @Library('shared-lib') _
-        //microservicePipeline(appName: 'payment-service', lang: 'node', registry: 'registry.techcorp.com') own registry uses
+         steps{
+             git branch: 'main' ,url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
+             sh ' ls -ltr'
+
+              // payment-service (Node.js)
+              // @Library('shared-lib') _
+             //microservicePipeline(appName: 'payment-service', lang: 'node', registry: 'registry.techcorp.com') own registry uses
+
           @Library('shared-lib') _
           microservicePipeline(appName: 'payment-service', lang: 'node', dockerhubUser: 'yaathvik20')
+         }
+       
      }
    /*
      stage('invertory service'){
@@ -22,6 +29,6 @@ stages{
   */
 }
 post{
-    sh 'success'
+    sh 'eco success'
 }
 
