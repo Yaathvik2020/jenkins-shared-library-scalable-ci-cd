@@ -1,0 +1,3 @@
+// notification-service
+@Library('shared-lib') _
+microservicePipeline(appName: 'notification-service', lang: 'python', dockerhubUser: 'yaathvik20')
