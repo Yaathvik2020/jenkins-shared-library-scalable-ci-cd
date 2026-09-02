@@ -44,12 +44,14 @@ pipeline {
 
     }
     post {
+        always {
+        cleanWs()
+        }
         success {
             echo 'All services built and pushed successfully'
         }
         failure {
             echo 'Build failed'
         }
-       cleanWS()
     }
 }
