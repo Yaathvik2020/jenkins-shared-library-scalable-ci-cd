@@ -13,7 +13,7 @@ pipeline {
                     //sh 'npm install'
                     //sh 'npm test'
                    dockerBuildPush(imageName: 'Payment Service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
-                    k8sDeploy(namespace: ns, imageName: 'Payment Service', tag: env.BUILD_NUMBER)           
+                    k8sDeploy(namespace: 'production', imageName: 'Payment Service', tag: env.BUILD_NUMBER)           
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                     sh 'ls -ltr'
                     //sh 'mvn clean test'
                     dockerBuildPush(imageName: 'inventory-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
-                    k8sDeploy(namespace: ns, imageName: 'inventory-service', tag: env.BUILD_NUMBER) 
+                    k8sDeploy(namespace: 'production', imageName: 'inventory-service', tag: env.BUILD_NUMBER) 
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
                     git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
                     sh 'ls -ltr'
                     dockerBuildPush(imageName: 'notification-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
-                    k8sDeploy(namespace: ns, imageName: 'notification-service', tag: env.BUILD_NUMBER) 
+                    k8sDeploy(namespace: 'production', imageName: 'notification-service', tag: env.BUILD_NUMBER) 
                    
                 }
             }
