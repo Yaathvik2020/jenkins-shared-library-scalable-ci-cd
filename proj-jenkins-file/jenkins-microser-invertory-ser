@@ -1,0 +1,2 @@
+@Library('shared-lib') _
+microservicePipeline(appName: 'inventory-service', lang: 'java', dockerhubUser: 'yaathvik20')
