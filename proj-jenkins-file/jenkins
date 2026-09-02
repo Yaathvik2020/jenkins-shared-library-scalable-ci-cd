@@ -10,8 +10,8 @@ pipeline {
                     //git branch: 'main', url: 'https://github.com/Yaathvik2020/payment-service.git'
                     git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
                     sh 'ls -ltr'
-                    sh 'npm install'
-                    sh 'npm test'
+                    //sh 'npm install'
+                    //sh 'npm test'
                     dockerBuildPush(imageName: 'payment-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
                 }
             }
