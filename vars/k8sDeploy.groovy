@@ -1,4 +1,5 @@
 def call(Map config) {
+    sh 'echo "pass"'
     /*   k8s need to deploy 
     sh """
         kubectl set image deployment/${config.imageName} \
