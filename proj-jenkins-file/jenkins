@@ -3,9 +3,12 @@ agent any
 stages{
      stage('Payement service'){
          // payment-service (Node.js)
-        @Library('shared-lib') _
-        microservicePipeline(appName: 'payment-service', lang: 'node', registry: 'registry.techcorp.com')
+        // @Library('shared-lib') _
+        //microservicePipeline(appName: 'payment-service', lang: 'node', registry: 'registry.techcorp.com') own registry uses
+          @Library('shared-lib') _
+          microservicePipeline(appName: 'payment-service', lang: 'node', dockerhubUser: 'yaathvik20')
      }
+   /*
      stage('invertory service'){
         // inventory-service (Java)
         @Library('shared-lib') _
@@ -16,6 +19,7 @@ stages{
         @Library('shared-lib') _
         microservicePipeline(appName: 'notification-service', lang: 'python', registry: 'registry.techcorp.com')
     }
+  */
 }
 post{
     sh 'success'
