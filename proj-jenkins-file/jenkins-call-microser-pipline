@@ -1,0 +1,2 @@
+@Library('shared-lib') _
+microservicePipeline(appName: 'payment-service', lang: 'node', dockerhubUser: 'yaathvik20')
