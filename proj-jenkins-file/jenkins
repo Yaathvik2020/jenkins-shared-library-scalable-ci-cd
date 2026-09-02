@@ -1,34 +1,55 @@
-pipeline{
-     agent any
- stages{
-     stage('Payement service'){
-         steps{
-             git branch: 'main' ,url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
-             sh ' ls -ltr'
+@Library('shared-lib') _
 
-              // payment-service (Node.js)
-              // @Library('shared-lib') _
-             //microservicePipeline(appName: 'payment-service', lang: 'node', registry: 'registry.techcorp.com') own registry uses
+pipeline {
+    agent any
+    stages {
 
-          @Library('shared-lib') _
-          microservicePipeline(appName: 'payment-service', lang: 'node', dockerhubUser: 'yaathvik20')
-         }
-       
-     }
-   /*
-     stage('invertory service'){
-        // inventory-service (Java)
-        @Library('shared-lib') _
-        microservicePipeline(appName: 'inventory-service', lang: 'java', registry: 'registry.techcorp.com')
-      }
-    stage('notification-service'){
-        // notification-service (Python)
-        @Library('shared-lib') _
-        microservicePipeline(appName: 'notification-service', lang: 'python', registry: 'registry.techcorp.com')
+        stage('Payment Service') {
+            steps {
+                dir('payment-service') { // it is make the diractory
+                    //git branch: 'main', url: 'https://github.com/Yaathvik2020/payment-service.git'
+                    git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
+                    sh 'ls -ltr'
+                    sh 'npm install'
+                    sh 'npm test'
+                    dockerBuildPush(imageName: 'payment-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                }
+            }
+        }
+
+        stage('Inventory Service') {
+            steps {
+                dir('inventory-service') {
+                    //git branch: 'main', url: 'https://github.com/Yaathvik2020/inventory-service.git'
+                    git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
+                    sh 'ls -ltr'
+                    //sh 'mvn clean test'
+                    dockerBuildPush(imageName: 'inventory-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                }
+            }
+        }
+
+        stage('Notification Service') {
+            steps {
+                dir('notification-service') {
+                    //git branch: 'main', url: 'https://github.com/Yaathvik2020/notification-service.git'
+                    git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
+                    sh 'ls -ltr'
+                   // sh 'pip install -r requirements.txt'
+                   // sh 'pytest'
+                    dockerBuildPush(imageName: 'notification-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                }
+            }
+        }
+
     }
-  */
-}
-post{
-    sh 'eco success'
-}
+    post {
+        success {
+            echo 'All services built and pushed successfully'
+        }
+        failure {
+            echo 'Build failed'
+        }
+       cleanWS()
+    }
 }
