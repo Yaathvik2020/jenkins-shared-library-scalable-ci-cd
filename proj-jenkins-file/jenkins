@@ -1,0 +1,23 @@
+pipeline{
+agent any
+stages{
+     stage('Payement service'){
+         // payment-service (Node.js)
+        @Library('shared-lib') _
+        microservicePipeline(appName: 'payment-service', lang: 'node', registry: 'registry.techcorp.com')
+     }
+     stage('invertory service'){
+        // inventory-service (Java)
+        @Library('shared-lib') _
+        microservicePipeline(appName: 'inventory-service', lang: 'java', registry: 'registry.techcorp.com')
+      }
+    stage('notification-service'){
+        // notification-service (Python)
+        @Library('shared-lib') _
+        microservicePipeline(appName: 'notification-service', lang: 'python', registry: 'registry.techcorp.com')
+    }
+}
+post{
+    sh 'success'
+}
+
