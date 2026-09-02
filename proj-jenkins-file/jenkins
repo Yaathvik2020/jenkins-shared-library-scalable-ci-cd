@@ -12,7 +12,8 @@ pipeline {
                     sh 'ls -ltr'
                     //sh 'npm install'
                     //sh 'npm test'
-                    dockerBuildPush(imageName: 'payment-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                   //dockerBuildPush(imageName: '', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                    microservicePipeline(appName: 'payment-service', lang: 'node', dockerhubUser: 'yaathvik20')
                 }
             }
         }
@@ -24,7 +25,8 @@ pipeline {
                     git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
                     sh 'ls -ltr'
                     //sh 'mvn clean test'
-                    dockerBuildPush(imageName: 'inventory-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                    //dockerBuildPush(imageName: 'inventory-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                   microservicePipeline(appName: 'inventory-service', lang: 'java', dockerhubUser: 'yaathvik20')
                 }
             }
         }
@@ -35,9 +37,8 @@ pipeline {
                     //git branch: 'main', url: 'https://github.com/Yaathvik2020/notification-service.git'
                     git branch: 'main', url: 'https://github.com/Yaathvik2020/DevOps-Practice-branch.git'
                     sh 'ls -ltr'
-                   // sh 'pip install -r requirements.txt'
-                   // sh 'pytest'
-                    dockerBuildPush(imageName: 'notification-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                    //dockerBuildPush(imageName: 'notification-service', tag: env.BUILD_NUMBER, dockerhubUser: 'yaathvik20')
+                    microservicePipeline(appName: 'inventory-service', lang: 'python', dockerhubUser: 'yaathvik20')
                 }
             }
         }
