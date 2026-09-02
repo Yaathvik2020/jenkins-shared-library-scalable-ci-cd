@@ -22,13 +22,13 @@ def call(Map config) {
                     }
                 }
             }
-            stage('Docker Build & Push') {
+            stage('Docker Build & Push') { 
                 steps {
                     dockerBuildPush(imageName: config.appName, tag: env.BUILD_NUMBER, dockerhubUser: config.dockerhubUser)
                 }
             }
             stage('Deploy') {
-                when { anyOf { branch 'main'; branch 'develop' } }
+                when { anyOf { branch 'main'; branch 'develop' } } 
                 steps {
                     script {
                         def ns = (env.BRANCH_NAME == 'main') ? 'production' : 'staging'
