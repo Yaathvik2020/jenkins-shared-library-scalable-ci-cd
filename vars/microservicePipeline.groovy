@@ -11,13 +11,13 @@ def call(Map config) {
                 steps {
                     script {
                         if (config.lang == 'node') {
-                            sh "echo npm tested"
+                            sh 'echo success npm'
                            // sh 'npm install && npm test'
                         } else if (config.lang == 'java') {
-                             sh "echo java tested"
+                             sh 'echo success java'
                             //sh 'mvn clean test'
                         } else if (config.lang == 'python') {
-                             sh "echo python tested"
+                             sh 'echo success python'
                             //sh 'pip install -r requirements.txt && pytest'
                         } else {
                             error "Unsupported language: ${config.lang}"
